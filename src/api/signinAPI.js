@@ -1,9 +1,9 @@
 import axiosClient from "./axiosClient";
 
 const signinAPI = {
-    signIn(phoneNumber, password) {
-    const url = "/auth/signin";
-    return axiosClient.post(url, phoneNumber, password);
+    signIn(phoneNumber) {
+    const url = "/auth/signin"
+    return axiosClient.post(url, phoneNumber);
   }
 
 };

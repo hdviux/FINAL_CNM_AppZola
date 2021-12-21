@@ -3,11 +3,9 @@ import axiosClient from "./axiosClient";
 const signupAPI = {
   checkPhone(phoneNumber) {
     const url = "/auth/checkPhone";
-    console.log(phoneNumber.phone);
     return axiosClient.post(url, { phone: phoneNumber.phone });
   },
   signUp(data) {
-    console.log(data);
     const url = "/auth/signup";
     return axiosClient.post(url, data);
   },
@@ -18,6 +16,14 @@ const signupAPI = {
   verifyOTPSignUp(phoneNumber, code) {
     const url = "/auth/verifyOTPSignUp";
     return axiosClient.post(url, phoneNumber, code);
+  },
+  forgotPassword(phoneNumber) {
+    const url = "/auth/forgotPassword";
+    return axiosClient.post(url, phoneNumber);
+  },
+  checkPhoneAlready(phoneNumber) {
+    const url = "/auth/checkPhoneAlready";
+    return axiosClient.post(url,  { phone: phoneNumber.phone });
   },
 };
 export default signupAPI;
