@@ -43,7 +43,7 @@ const ChangePass = ({ navigation }) => {
     ) {
       Alert.alert("Hãy điền hết các thông tin");
     } else {
-      if (enterPassHandler == enterRePassHandler) {
+      if (enterNewPassHandler == enterRePassHandler) {
         if (enterNewPassHandler.length >= 6) {
           if (enterPassHandler===enterNewPassHandler) {
             Alert.alert("Mật khẩu mới không được trùng với mật khẩu cũ");
@@ -53,7 +53,7 @@ const ChangePass = ({ navigation }) => {
                 const verify = await userAPI.ChangePassword(
                   {
                     password: enterPassHandler,
-                    reEnterPassword: enterRePassHandler,
+                    reEnterPassword: enterPassHandler,
                     newPassword: enterNewPassHandler,
                   },
                   token
@@ -121,7 +121,7 @@ const ChangePass = ({ navigation }) => {
               <View style={styles.maincontainer}>
                 <TextInput
                   secureTextEntry={true}
-                  placeholder="Nhập lại mật khẩu cũ "
+                  placeholder="Nhập mật khẩu mới "
                   value={enterRePassHandler}
                   onChangeText={(text) => {
                     setEnterRePassHandler(text);
@@ -149,7 +149,7 @@ const ChangePass = ({ navigation }) => {
               <View style={styles.maincontainer}>
                 <TextInput
                   secureTextEntry={true}
-                  placeholder="Nhập mật khẩu mới "
+                  placeholder="Nhập lại mật khẩu mới "
                   value={enterNewPassHandler}
                   onChangeText={(text) => {
                     setEnterNewPassHandler(text);

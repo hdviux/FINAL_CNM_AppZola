@@ -169,7 +169,7 @@ const AddFriendIntoGroup = () => {
         {resultUser && (
           <View style={styles.leftContainerr}>
             <Image
-              source={require("../../images/b.jpg")}
+              source={{uri:user.avatar}}
               style={styles.avatar}
             />
             <View style={styles.cenContainer}>
