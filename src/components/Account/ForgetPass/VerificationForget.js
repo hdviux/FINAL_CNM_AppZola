@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import {
+  Alert,
   Image,
   KeyboardAvoidingView,
   StyleSheet,
@@ -40,7 +41,7 @@ const VerificationForget = ({ navigation }) => {
         phone: route.params.std,
       });
       if (sendOTP.status === 201) {
-        return;
+        Alert.alert("Đã gửi lại mã!!!");
       }
     };
     fetchSendOTP();
