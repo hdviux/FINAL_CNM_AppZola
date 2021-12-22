@@ -16,7 +16,6 @@ import {
 import { Button } from "react-native-elements";
 import { AntDesign } from "@expo/vector-icons";
 import * as Contacts from "expo-contacts";
-import ItemPhoneBook from "../Room/ItemPhoneBook";
 import { useSelector } from "react-redux";
 import call from "react-native-phone-call";
 const PhoneBookTab = ({ navigation }) => {

@@ -56,7 +56,7 @@ const GroupInformation = ({ navigation }) => {
                   token
                 );
                 if (deleteGroup.status === 200) {
-                  navigation.navigate("ChatTab");
+                  navigation.navigate("GroupTab");
                 }
               } catch (error) {
                 console.log(error);
@@ -65,7 +65,7 @@ const GroupInformation = ({ navigation }) => {
             fetchDeleteGroup();
           }
         }
-        navigation.navigate("ChatTab");
+        navigation.navigate("GroupTab");
       } catch (error) {
         console.log(error);
       }

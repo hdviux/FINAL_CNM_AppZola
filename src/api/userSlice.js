@@ -13,9 +13,6 @@ export const signin = createAsyncThunk("user/signin", async (payload) => {
 const userSlice = createSlice({
   name: "user",
   initialState: {
-    // user: AsyncStorage.getItem("user").then((res) => {
-    //   return JSON.parse(res);
-    // }),
     user:signin
   },
   reducers: {},

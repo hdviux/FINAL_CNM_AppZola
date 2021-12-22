@@ -39,7 +39,6 @@ const GetMessage = (props) => {
   }, []);
   const uploadFile = props.data.text.split(".");
   const filesTypes = "." + uploadFile[uploadFile.length - 1];
-  console.log(props.data.text);
   return (
     <View style={styles.main}>
       <ScrollView style={styles.container}>

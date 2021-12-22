@@ -6,22 +6,19 @@ import {
   Image,
   TextInput,
   ScrollView,
-  Pressable
+  Pressable,
+  Alert,
 } from "react-native";
 import { Button } from "react-native-elements";
 import { useSelector, useDispatch } from "react-redux";
-import roomAPI from "../../api/roomAPI";
 import groupAPI from "../../api/groupAPI";
 import { useRoute } from "@react-navigation/native";
 import { addListUser, removeListUser } from "../../api/listUserSlice";
-import userAPI from "../../api/userAPI";
 import { AntDesign } from "@expo/vector-icons";
 import addFriendAPI from "../../api/addFriendAPI";
 const AddFriendIntoGroup = () => {
   const dispatch = useDispatch();
   const route = useRoute();
-  const userObject = useSelector((state) => state.user.user.user);
-  const idLogin = userObject._id;
   const token = useSelector((state) => state.user.user.accessToken);
   const ListUserRedux = useSelector((state) => state.listUser);
   const [icon, seticon] = useState(false);
@@ -29,65 +26,22 @@ const AddFriendIntoGroup = () => {
   ListUserRedux.listUser.map((user) => {
     array.push(user.id);
   });
-  console.log(array);
-  const [listUser, setListUser] = useState([]);
-  const [addingroup, setaddingroup] = useState(true);
-  const [deleteingroup, setdeleteingroup] = useState(false);
-  ///Lấy danh sách bạn bè
-  const [arrayFriend, setArrayFriend] = useState([]);
-  useEffect(() => {
-    const fetchGetRoomFriend = async () => {
-      try {
-        const requestGetRoomByFriend = await roomAPI.getRoomFriend(token);
-        setArrayFriend(requestGetRoomByFriend.data);
-        // const index1 = route.params.room.users.findIndex(
-        //   (x) => x === getuser.data.users[0]._id
-        // );
-
-        // for (let index = 0; index < requestGetRoomByFriend.data.length; index++) {
-        //   if(requestGetRoomByFriend.data.users[index]._id==
-
-        // }
-        // console.log(index1);
-        // if (index1 != -1) {
-        //   setdeleteingroup(true);
-        //   setaddingroup(false);
-        // } else {
-        //   setdeleteingroup(false);
-        //   setaddingroup(true);
-        // }
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchGetRoomFriend();
-  }, []);
-  const [alreadyInList, setAlreadyInList] = useState(false);
   //getuserbyname
   const [enteredName, setEnterName] = useState("");
   const [user, setUser] = useState([]);
   const [resultUser, setResultUser] = useState(false);
   const [resultUser1, setResultUser1] = useState(false);
-  const [resultListUser, setResultListUser] = useState(true);
   const searchHandler = async () => {
     const fetchGetUserByPhone = async () => {
       try {
         const getuser = await addFriendAPI.GetUserByPhone(enteredName, token);
         if (getuser.status === 200) {
           setResultUser(true);
-          setResultListUser(false);
           setUser(getuser.data.users);
           //props.onSendRoomToAddMember
           const index1 = route.params.room.users.findIndex(
             (x) => x === getuser.data.users._id
           );
-          if (index1 != -1) {
-            setdeleteingroup(false);
-            setaddingroup(false);
-          } else {
-            setdeleteingroup(false);
-            setaddingroup(true);
-          }
         }
       } catch (error) {
         console.log(error);
@@ -101,11 +55,9 @@ const AddFriendIntoGroup = () => {
     const action = addListUser({
       id: user._id,
       name: user.name,
+      avatar: user.avatar,
     });
     dispatch(action);
-    setListUser(ListUserRedux);
-    setaddingroup(false);
-    setdeleteingroup(true);
     setResultUser(false);
     setResultUser1(true);
   };
@@ -120,7 +72,15 @@ const AddFriendIntoGroup = () => {
           token
         );
         if (addMember.status === 200) {
-          console.log("Ok con dê");
+          ListUserRedux.listUser.map((user) => {
+            const action = removeListUser({
+              idNeedToRemove: user.id,
+            });
+            dispatch(action);
+          });
+          Alert.alert("Thêm thành công");
+          seticon(false);
+          setEnterName("");
         }
       } catch (error) {
         console.log(error);
@@ -151,7 +111,6 @@ const AddFriendIntoGroup = () => {
                 onPress={() => {
                   seticon(false);
                   setEnterName(null);
-                  setResultListUser(true);
                   setResultUser(false);
                 }}
               />
@@ -168,10 +127,7 @@ const AddFriendIntoGroup = () => {
       <View style={styles.body}>
         {resultUser && (
           <View style={styles.leftContainerr}>
-            <Image
-              source={{uri:user.avatar}}
-              style={styles.avatar}
-            />
+            <Image source={{ uri: user.avatar }} style={styles.avatar} />
             <View style={styles.cenContainer}>
               <Text style={styles.usernamee}>{user.name}</Text>
             </View>
@@ -191,10 +147,7 @@ const AddFriendIntoGroup = () => {
             {ListUserRedux.listUser.map((data) => {
               return (
                 <View style={styles.leftContainerr} key={data.id}>
-                  <Image
-                    source={require("../../images/b.jpg")}
-                    style={styles.avatar}
-                  />
+                  <Image source={{ uri: data.avatar }} style={styles.avatar} />
                   <View style={styles.cenContainer}>
                     <Text style={styles.usernamee}>{data.name}</Text>
                   </View>
@@ -206,9 +159,6 @@ const AddFriendIntoGroup = () => {
                         idNeedToRemove: data.id,
                       });
                       dispatch(action);
-                      setListUser(ListUserRedux);
-                      setaddingroup(true);
-                      setdeleteingroup(false);
                       setResultUser(false);
                       setResultUser1(true);
                     }}
@@ -280,8 +230,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginTop: 5,
     justifyContent: "center",
-    marginLeft:30,
-    marginRight:30
+    marginLeft: 30,
+    marginRight: 30,
   },
   usernamee: {
     fontWeight: "bold",
@@ -305,7 +255,7 @@ const styles = StyleSheet.create({
   containerr: {
     flexDirection: "row",
     marginLeft: 10,
-    marginRight:10,
+    marginRight: 10,
     alignItems: "center",
   },
   maincontainer: {
