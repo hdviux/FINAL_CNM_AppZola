@@ -73,7 +73,7 @@ const ChangePass = ({ navigation }) => {
           Alert.alert("Nhập lại mật khẩu mới phải lớn hơn 6 kí tự");
         }
       } else {
-        Alert.alert("Nhập lại mật khẩu cũ chưa chính xác");
+        Alert.alert("Nhập lại mật khẩu mới chưa chính xác");
       }
     }
   };

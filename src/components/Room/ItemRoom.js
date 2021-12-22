@@ -51,7 +51,7 @@ const ItemRoom = (props) => {
   }, []);
   const [lastMessages, setLastMessages] = useState("");
   const [lastTime, setlastTime] = useState("");
-
+  const [messdata, setmessdata] = useState(null);
   useEffect(() => {
     const fetchMessage = async () => {
       try {
@@ -61,6 +61,7 @@ const ItemRoom = (props) => {
           },
           token
         );
+        setmessdata(res.data.length);
         for (let i = 0; i < res.data.length; i++) {
           setLastMessages(res.data[i].text);
           setlastTime(res.data[i].createdAt);
@@ -120,7 +121,7 @@ const ItemRoom = (props) => {
                     : user?.name}
                 </Text>
                 <Text style={{ flex: 1, textAlign: "right" }}>
-                  {lastTime === null ? "" : moment(lastTime).fromNow()}
+                  {messdata == 0 ? "" : moment(lastTime).fromNow()}
                 </Text>
               </View>
               <Text style={{ width: 100, marginTop: 10 }} numberOfLines={1}>

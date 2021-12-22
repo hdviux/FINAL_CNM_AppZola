@@ -11,7 +11,7 @@ import {
 } from "react-native";
 import addFriendAPI from "../../api/addFriendAPI";
 import moment from "moment";
-import { FileIcon } from "react-file-icon";
+import { FileIcon, defaultStyles } from "react-file-icon";
 import { useNavigation } from "@react-navigation/native";
 import { Video, AVPlaybackStatus } from "expo-av";
 const GetMessage = (props) => {
@@ -23,7 +23,6 @@ const GetMessage = (props) => {
     return idLogin === props.data.sender;
   };
   const [user, setUser] = useState();
-
 
   useEffect(() => {
     const fetchGetUser = async () => {
@@ -39,7 +38,8 @@ const GetMessage = (props) => {
     fetchGetUser();
   }, []);
   const uploadFile = props.data.text.split(".");
-  const filesTypes = uploadFile[uploadFile.length - 1];
+  const filesTypes = "." + uploadFile[uploadFile.length - 1];
+  console.log(props.data.text);
   return (
     <View style={styles.main}>
       <ScrollView style={styles.container}>
@@ -65,7 +65,11 @@ const GetMessage = (props) => {
                 navigation.navigate("SeeImage", { uri: props.data.text })
               }
             >
-              <Image style={styles.image2} source={{ uri: props.data.text }} />
+              <Image
+                style={styles.image2}
+                source={{ uri: props.data.text }}
+                alt=""
+              />
             </Pressable>
           ) : props.data.type === "text" ? (
             <Text>{props.data.text}</Text>
@@ -89,14 +93,14 @@ const GetMessage = (props) => {
                 height: "auto",
               }}
             >
-              <Text onPress={() => Linking.openURL(props.data.text)}>
+              {/* <Pressable onPress={() => Linking.openURL(props.data.text)}>
                 <FileIcon
                   type="document"
-                  extension={filesTypes}
-                  {...defaultStyles[filesTypes]}
-                  size="5"
-                />
-              </Text>
+                  size="2"
+                  extension="docx"
+                  {...defaultStyles.docx}
+                ></FileIcon>
+              </Pressable> */}
               <Text onPress={() => Linking.openURL(props.data.text)}>
                 {props.data.nameFile}
               </Text>

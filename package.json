@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@adobe/react-spectrum": "^3.15.0",
+    "@lowkey/react-native-gif": "^3.1.0",
     "@react-native-async-storage/async-storage": "^1.15.11",
     "@react-native-community/datetimepicker": "^3.5.2",
     "@react-native-picker/picker": "^2.2.1",

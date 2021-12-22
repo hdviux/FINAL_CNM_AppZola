@@ -7,6 +7,7 @@ import {
   TextInput,
   KeyboardAvoidingView,
   Pressable,
+  Alert,
 } from "react-native";
 import { MaterialIcons, FontAwesome5 } from "@expo/vector-icons";
 import { RadioButton } from "react-native-paper";
@@ -89,7 +90,7 @@ const Me = ({ navigation }) => {
       }
     })();
   }, []);
-  const [image, setImage] = useState(null);
+  const [image, setImage] = useState(userAfterLoginRedux.avatar);
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
@@ -119,7 +120,7 @@ const Me = ({ navigation }) => {
         setviewava1(false);
         setviewava2(true);
         if (verify.status === 201) {
-          console.log("Success");
+          Alert.alert("Đổi thành công ảnh đại diện");
         }
       } catch (error) {
         console.log(error);
@@ -151,7 +152,7 @@ const Me = ({ navigation }) => {
         setviewbirth1(false);
         setviewbirth2(true);
         if (verify.status === 201) {
-          console.log("Success");
+          Alert.alert("Thay đổi thông tin thành công");
         }
       } catch (error) {
         console.log(error);

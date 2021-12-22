@@ -15,9 +15,10 @@ import {
 import addFriendAPI from "../../api/addFriendAPI";
 import { Ionicons } from "@expo/vector-icons";
 import { useSelector } from "react-redux";
+import { useNavigation } from '@react-navigation/native';
 const ItemFriend = (props) => {
+  const navigation = useNavigation();
   const [user, setUser] = useState(null);
-  const [online, setonline] = useState("#00cc00");
   const token = useSelector((state) => state.user.user.accessToken);
   useEffect(() => {
     const friendId = props.data.users.find((m) => m !== props.idLogin);
@@ -91,7 +92,7 @@ const ItemFriend = (props) => {
         <View style={styles.leftContainer}>
           <Image source={{ uri: user?.users.avatar }} style={styles.avatar} />
           <View style={styles.cenContainer}>
-            <Text numberOfLines={1} style={styles.username}>
+            <Text numberOfLines={1} style={styles.username} onPress={()=> navigation.navigate("FriendInfo",{user:user?.users})}>
               {user?.users.name}
             </Text>
           </View>

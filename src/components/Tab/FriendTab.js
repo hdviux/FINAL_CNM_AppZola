@@ -183,22 +183,15 @@ const FriendScreen = ({ navigation }) => {
             <ScrollView>
               {user.map((data) => {
                 return (
-                  <Pressable
-                    key={data._id}
-                    onPress={() =>
-                      navigation.navigate("Friendd", { user: data })
-                    }
-                  >
-                    <View style={styles.leftContainerr}>
-                      <Image
-                        source={require("../../images/b.jpg")}
-                        style={styles.avatarr}
-                      />
-                      <View style={styles.cenContainerr}>
-                        <Text style={styles.usernamee}>{data.name}</Text>
-                      </View>
+                  <View style={styles.leftContainerr} key={data._id}>
+                    <Image
+                      source={{ uri: data.avatar }}
+                      style={styles.avatarr}
+                    />
+                    <View style={styles.cenContainerr}>
+                      <Text style={styles.usernamee}>{data.name}</Text>
                     </View>
-                  </Pressable>
+                  </View>
                 );
               })}
             </ScrollView>
@@ -230,7 +223,7 @@ const styles = StyleSheet.create({
     width: "100%",
     backgroundColor: "#fff",
     height: "6%",
-    marginBottom:"3%"
+    marginBottom: "3%",
   },
   b2: {
     backgroundColor: "#fff",

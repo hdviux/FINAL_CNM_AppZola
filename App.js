@@ -28,6 +28,7 @@ import SeeImage from "./src/components/Room/SeeImage";
 import ListSendedRequestFriend from "./src/components/Friend/ListSendedRequestFriend";
 import GroupInformation from "./src/components/Group/GroupInformation";
 import Call from "./src/components/Room/Call";
+import FriendInformation from "./src/components/Friend/FriendInformation";
 
 const Stack = createStackNavigator();
 
@@ -79,7 +80,10 @@ export default function App({ navigation }) {
           <Stack.Screen
             name="Call"
             component={Call}
-            options={{ title:"", headerStyle: { height: 100,backgroundColor:"#fff" } }}
+            options={{
+              title: "",
+              headerStyle: { height: 100, backgroundColor: "#fff" },
+            }}
           />
           <Stack.Screen
             name="Me"
@@ -95,6 +99,16 @@ export default function App({ navigation }) {
             options={{
               headerTitleAlign: "center",
               title: "THÔNG TIN NHÓM",
+              headerTintColor: "#fff",
+              headerStyle: { backgroundColor: "#2089dc" },
+            }}
+          />
+          <Stack.Screen
+            name="FriendInfo"
+            component={FriendInformation}
+            options={{
+              headerTitleAlign: "center",
+              title: "",
               headerTintColor: "#fff",
               headerStyle: { backgroundColor: "#2089dc" },
             }}
