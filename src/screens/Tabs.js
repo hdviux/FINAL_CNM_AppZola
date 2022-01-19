@@ -22,7 +22,7 @@ const Tab = createBottomTabNavigator();
 
 const Tabs = ({ navigation }) => {
   const socket = useRef();
-  const ENDPOINT = "http://54.251.19.43:5000/";
+  const ENDPOINT = "http://192.168.1.152:5000/";
   useEffect(() => {
     socket.current = io(ENDPOINT, {
       transports: ["websocket", "polling", "flashsocket"],

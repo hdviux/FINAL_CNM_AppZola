@@ -130,7 +130,7 @@ const ChatOneOne = ({ navigation }) => {
     formData.append("uploadFile", fileSelected);
     // fd.append("uploadFile", fileSelected);
     axios
-      .post("http://54.251.19.43:5000/messages/addFile", formData)
+      .post("http://192.168.1.152:5000/messages/addFile", formData)
       .then((res) => {
         const uploadFile = res.data.split(".");
         const filesTypes = uploadFile[uploadFile.length - 1];
@@ -201,7 +201,7 @@ const ChatOneOne = ({ navigation }) => {
     formData.append("uploadFile", fileSelected);
     // fd.append("uploadFile", fileSelected);
     axios
-      .post("http://54.251.19.43:5000/messages/addFile", formData)
+      .post("http://192.168.1.152:5000/messages/addFile", formData)
       .then((res) => {
         const uploadFile = res.data.split(".");
         const filesTypes = uploadFile[uploadFile.length - 1];
@@ -272,7 +272,7 @@ const ChatOneOne = ({ navigation }) => {
     formData.append("uploadFile", fileSelected);
     // fd.append("uploadFile", fileSelected);
     axios
-      .post("http://54.251.19.43:5000/messages/addFile", formData)
+      .post("http://192.168.1.152:5000/messages/addFile", formData)
       .then((res) => {
         const uploadFile = res.data.split(".");
         const filesTypes = uploadFile[uploadFile.length - 1];
